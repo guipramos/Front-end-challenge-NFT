@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Roboto Mono", monospace;
+
+  /* Fundos */
+  --color-surface: #241613;
+  --color-surface-200: #241612;
+  --color-surface-alt: #38210f;
+  --color-surface-alt-200: #38220f;
+  --color-black: #140d0a;
+
+  /* Marca / ação */
+  --color-primary-200: #d28a4c;
+  --color-primary-300: #b39463;
+  --color-primary-hover: #e09a60;
+
+  /* Textos */
+  --color-muted-200: #cfb28c;
+
+  /* Background claros */
+  --color-nft-bg: #e1dcbf;
+
+  /* Indicador de campo obrigatório */
+  --color-required: #e2674a;
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+}
+
+:root {
+  --background: #150d0a;
+  --foreground: #f5f1eb;
+  --card: #241612;
+  --card-foreground: #f5f1eb;
+  --popover: #241613;
+  --popover-foreground: #f5f1eb;
+  --primary: #e89b55;
+  --primary-foreground: #3a1b00;
+  --secondary: #38210f;
+  --secondary-foreground: #f5f1eb;
+  --muted: #38220f;
+  --muted-foreground: #c4a98a;
+  --accent: #38210f;
+  --accent-foreground: #f5f1eb;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #38210f;
+  --input: #38220f;
+  --ring: #e89b55;
+  --radius: 0.5rem;
+}
+
+@utility container {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+
+  @media (width >= 640px) {
+    width: min(1200px, 100% - 3rem);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
