@@ -3,7 +3,6 @@ import { Header } from "../Header";
 import { Footer } from "../Footer";
 
 export function RootLayout() {
-  // A tela "Meu perfil" usa as medidas do cabeçalho do design dela.
   const isProfile = useRouterState({
     select: (state) => state.location.pathname === "/perfil",
   });

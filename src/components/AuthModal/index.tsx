@@ -16,7 +16,6 @@ export type AuthMode = "login" | "signup";
 type AuthModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  /** Aba exibida ao abrir o modal. */
   defaultMode?: AuthMode;
 };
 
@@ -27,7 +26,8 @@ const tabs = [
 
 const descriptions: Record<AuthMode, string> = {
   login: "Entre para gerenciar sua carteira, coleção e perfil de criador.",
-  signup: "Crie seu perfil de colecionador e conecte uma carteira quando quiser.",
+  signup:
+    "Crie seu perfil de colecionador e conecte uma carteira quando quiser.",
 };
 
 export function AuthModal({
@@ -38,13 +38,11 @@ export function AuthModal({
   const [mode, setMode] = useState<AuthMode>(defaultMode);
 
   function handleOpenChange(nextOpen: boolean) {
-    // Sempre volta para a aba inicial na próxima abertura.
     if (!nextOpen) setMode(defaultMode);
     onOpenChange(nextOpen);
   }
 
   function handleSuccess() {
-    // Ainda não há API de autenticação: apenas fecha o modal.
     handleOpenChange(false);
   }
 

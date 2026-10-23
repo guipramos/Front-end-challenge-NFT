@@ -19,7 +19,6 @@ const formatPrice = (value: number) => `${value.toFixed(2)} ${CURRENCY}`;
 let carrinho: CartItemProps[] = cartItems.map((item) => ({ ...item }));
 const TAXA_REDE = 0.016;
 
-/** Restaura o carrinho inicial (usado pelos testes para isolar o estado do mock). */
 export function resetCarrinho() {
   carrinho = cartItems.map((item) => ({ ...item }));
 }
@@ -119,7 +118,6 @@ export const handlers = [
       items: resumo.items,
     };
 
-    // A compra esvazia o carrinho.
     carrinho = [];
 
     return HttpResponse.json(transaction, { status: 201 });

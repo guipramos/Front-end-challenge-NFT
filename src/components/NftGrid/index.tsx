@@ -8,7 +8,6 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NftCard } from "../NftCard";
 import { Pagination } from "../Pagination";
-import { marketNfts } from "../../data/nfts";
 import { useMemo, useState } from "react";
 import type { Filters, Nft, SortValue, Tab } from "../../Types";
 import { priceToNumber } from "@/lib/utils";
@@ -38,7 +37,6 @@ const EMPTY: readonly Nft[] = [];
 export function NftGrid({ filters }: NftGridProps) {
   const { data, isLoading, isError } = useNfts();
   const nfts = data ?? EMPTY;
-  console.log(nfts);
 
   const [tab, setTab] = useState<Tab>(tabs[0]);
   const [sort, setSort] = useState<SortValue>("recent");
@@ -85,7 +83,7 @@ export function NftGrid({ filters }: NftGridProps) {
         return priceToNumber(a.price) - priceToNumber(b.price);
       if (sort === "price-desc")
         return priceToNumber(b.price) - priceToNumber(a.price);
-      return b.listedAt.localeCompare(a.listedAt); // "recent"
+      return b.listedAt.localeCompare(a.listedAt);
     });
   }, [nfts, filters, tab, sort, now]);
 
@@ -129,7 +127,15 @@ export function NftGrid({ filters }: NftGridProps) {
         </div>
       </div>
 
-      {pageNfts.length === 0 ? (
+      {isLoading ? (
+        <p role="status" className="py-12 text-center text-muted-foreground">
+          Carregando NFTs...
+        </p>
+      ) : isError ? (
+        <p role="alert" className="py-12 text-center text-muted-foreground">
+          Não foi possível carregar os NFTs. Tente novamente.
+        </p>
+      ) : pageNfts.length === 0 ? (
         <p className="py-12 text-center text-muted-foreground">
           Nenhum NFT encontrado com esses filtros.
         </p>

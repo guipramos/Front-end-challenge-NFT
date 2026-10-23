@@ -5,7 +5,6 @@ import { resetCarrinho } from "@/mocks/handlers";
 import { queryClient } from "@/lib/queryClient";
 import { server } from "./server";
 
-// --- Polyfills que o jsdom não implementa (necessários para o Radix UI) ---
 class ResizeObserverMock {
   observe() {}
   unobserve() {}
@@ -30,7 +29,6 @@ Element.prototype.setPointerCapture ??= () => {};
 Element.prototype.releasePointerCapture ??= () => {};
 window.scrollTo = vi.fn() as typeof window.scrollTo;
 
-// --- Mock da API (MSW) ---
 beforeAll(() => server.listen({ onUnhandledFrame: "error" }));
 
 afterEach(() => {

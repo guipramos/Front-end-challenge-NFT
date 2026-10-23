@@ -75,7 +75,6 @@ function buildNft({
   };
 }
 
-/** NFTs listados no Mercado (grade da Home). */
 export const marketNfts: readonly Nft[] = (
   [
     {
@@ -180,10 +179,6 @@ export const marketNfts: readonly Nft[] = (
   ] satisfies readonly NftSeed[]
 ).map(buildNft);
 
-/**
- * Carrossel "Mais desta coleção": três páginas de cinco itens.
- * A página central é a exibida por padrão.
- */
 export const collectionNftPages: readonly (readonly Nft[])[] = (
   [
     [

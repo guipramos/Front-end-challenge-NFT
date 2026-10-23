@@ -3,7 +3,6 @@ export type FilterOption = {
   count: number;
 };
 
-/** Resposta de GET /api/filter-options. */
 export type FilterOptions = {
   collections: FilterOption[];
   networks: FilterOption[];

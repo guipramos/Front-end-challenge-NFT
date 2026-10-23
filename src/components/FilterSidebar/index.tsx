@@ -16,7 +16,6 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
   const collections = options?.collections ?? [];
   const networks = options?.networks ?? [];
 
-  // Rascunho do slider: só vira filtro de verdade ao clicar em "Aplicar".
   const [draftRange, setDraftRange] = useState<number[]>(filters.price);
 
   const toggleCategory = (label: string) => {

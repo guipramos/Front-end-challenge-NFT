@@ -1,6 +1,5 @@
 import type { FilterOptions, Filters } from "../Types";
 
-/** "Banco de dados" do mock: devolvido pelo MSW em GET /api/filter-options. */
 export const filterOptions: FilterOptions = {
   collections: [
     { label: "Arte digital", count: 28 },

@@ -1,6 +1,5 @@
 import type { IconProps } from "../../../Types";
 
-/** Versão colorida (marca) do Facebook, usada nos botões de login social. */
 export function FacebookBrand(props: IconProps) {
   return (
     <svg

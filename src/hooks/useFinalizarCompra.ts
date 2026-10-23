@@ -11,7 +11,6 @@ export function useFinalizarCompra() {
       return data;
     },
     onSuccess: () => {
-      // A compra esvazia o carrinho no servidor.
       queryClient.invalidateQueries({ queryKey: ["carrinho"] });
     },
   });

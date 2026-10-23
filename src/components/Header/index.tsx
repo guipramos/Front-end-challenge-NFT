@@ -48,7 +48,7 @@ const variantStyles = {
 } as const;
 
 export function Header({ variant = "default" }: HeaderProps) {
-  const { data: carrinho, isLoading } = useCarrinho();
+  const { data: carrinho } = useCarrinho();
   const [authOpen, setAuthOpen] = useState(false);
 
   const styles = variantStyles[variant];
@@ -75,7 +75,6 @@ export function Header({ variant = "default" }: HeaderProps) {
               activeProps={
                 isProfile ? undefined : { className: "text-primary font-bold" }
               }
-              // No design da tela "Meu perfil" o item "Início" aparece destacado.
               data-status={isProfile && item.to === "/" ? "active" : undefined}
               className={cn(
                 `
@@ -94,7 +93,6 @@ export function Header({ variant = "default" }: HeaderProps) {
             </Link>
           ))}
         </nav>
-        {/* 20 (lupa) + 28 + 31 (carrinho) + 28 + 100 (botão) = 207px */}
         <div className={styles.actions}>
           <SearchButton />
           <CartButton

@@ -3,7 +3,6 @@ import nftArtwork04 from "../assets/monkey-4.png";
 import nftArtwork05 from "../assets/monkey-5.png";
 import type { CartItemProps } from "../Types";
 
-/** Itens estáticos do carrinho (apenas para montar o layout). */
 export const cartItems: readonly CartItemProps[] = [
   {
     image: nftArtwork03,

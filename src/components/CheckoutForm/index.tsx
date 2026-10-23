@@ -23,7 +23,6 @@ type FieldProps = {
   id: string;
   label: string;
   required?: boolean;
-  /** Adiciona um espaço entre o texto do rótulo e o asterisco. */
   spacedMark?: boolean;
   className?: string;
   children: ReactNode;
@@ -134,7 +133,6 @@ export function CheckoutForm() {
           />
         </Field>
 
-        {/* Campo sem rótulo visível: alinhado à base para acompanhar o input ao lado. */}
         <div className="self-end">
           <Input
             id="secondary-wallet"

@@ -21,7 +21,6 @@ export function createTestQueryClient() {
   });
 }
 
-/** Wrapper só com React Query (para hooks e componentes sem rotas). */
 export function createQueryWrapper(client = createTestQueryClient()) {
   return function QueryWrapper({ children }: { children: ReactNode }) {
     return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
@@ -38,7 +37,6 @@ export function renderHookWithQuery<Result, Props>(
   };
 }
 
-/** Rotas "fantasma" para as quais os componentes isolados podem navegar. */
 const stubPaths = [
   "/mercado",
   "/mercado/carrinho",
@@ -49,11 +47,6 @@ const stubPaths = [
   "/perfil",
 ] as const;
 
-/**
- * Renderiza um componente isolado dentro de um router em memória.
- * O componente aparece em todas as rotas; cada rota exibe um marcador
- * `data-testid="route:<caminho>"` para verificar a navegação.
- */
 export async function renderWithRouter(
   ui: ReactElement,
   { route = "/", client = createTestQueryClient() } = {},
@@ -98,10 +91,6 @@ export async function renderWithRouter(
   return { user, client, router: testRouter, ...utils };
 }
 
-/**
- * Renderiza o app inteiro (rotas reais + layout) numa URL específica,
- * usando um histórico em memória.
- */
 export async function renderApp(route = "/") {
   const client = createTestQueryClient();
   const testRouter = createRouter({

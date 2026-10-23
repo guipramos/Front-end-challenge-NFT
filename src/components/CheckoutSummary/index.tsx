@@ -26,7 +26,6 @@ export function CheckoutSummary() {
     event.preventDefault();
     const form = event.currentTarget.form;
 
-    // Mantém a validação nativa dos campos obrigatórios do formulário.
     if (form && !form.reportValidity()) return;
 
     const formData = form ? new FormData(form) : null;

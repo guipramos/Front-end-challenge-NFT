@@ -6,7 +6,6 @@ import { RootLayout } from "./components/RootLayout";
 import { router } from "./router";
 import { renderApp } from "@/test/utils";
 
-/** A home tem outros <header> (ex.: seção do blog); o do site é sempre o primeiro. */
 const siteHeader = () => screen.getAllByRole("banner")[0];
 
 beforeEach(() => {

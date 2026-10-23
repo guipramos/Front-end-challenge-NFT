@@ -1,9 +1,5 @@
 import type { IconProps } from "../../../Types";
 
-/**
- * Ícones de traço (stroke) usados na tela "Meu perfil".
- * Todos usam `currentColor`, então a cor vem de `text-*` no elemento pai.
- */
 function StrokeIcon({ children, ...props }: IconProps) {
   return (
     <svg

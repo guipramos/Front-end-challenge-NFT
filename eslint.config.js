@@ -20,7 +20,6 @@ export default defineConfig([
     },
   },
   {
-    // Componentes do shadcn/ui exportam também as variantes (cva)
     files: ['src/components/ui/**/*.{ts,tsx}'],
     rules: {
       'react-refresh/only-export-components': 'off',

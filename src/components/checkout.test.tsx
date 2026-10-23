@@ -262,7 +262,6 @@ describe("CheckoutForm", () => {
 });
 
 describe("CheckoutSummary", () => {
-  /** Na página real o resumo vive dentro do <form> de pagamento. */
   const renderSummary = () =>
     renderWithRouter(
       <form>

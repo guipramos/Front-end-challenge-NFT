@@ -572,7 +572,6 @@ describe("FilterSidebar", () => {
 
 describe("NftGrid", () => {
   beforeEach(() => {
-    // O componente faz console.log da lista (log de depuração).
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.useFakeTimers({ toFake: ["Date"] });
     vi.setSystemTime(new Date("2026-10-23T12:00:00Z"));
@@ -587,7 +586,6 @@ describe("NftGrid", () => {
       .getAllByRole("link", { name: /Ver detalhes de/ })
       .map((link) => link.getAttribute("aria-label")!.replace("Ver detalhes de ", ""));
 
-  /** Renderiza o grid e espera a API responder (evita falsos positivos no estado vazio). */
   async function renderGrid(filters: Filters = DEFAULT_FILTERS) {
     const utils = await renderWithRouter(<NftGrid filters={filters} />);
     await waitFor(() =>
@@ -614,7 +612,7 @@ describe("NftGrid", () => {
     const { user } = await renderGrid();
 
     const nav = screen.getByRole("navigation", { name: "Paginação" });
-    expect(within(nav).getAllByRole("link")).toHaveLength(3); // 1, 2 e próxima
+    expect(within(nav).getAllByRole("link")).toHaveLength(3);
 
     await user.click(within(nav).getByRole("link", { name: "2" }));
 
@@ -777,16 +775,29 @@ describe("NftGrid (dados)", () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
   });
 
-  it("trata falha da API mostrando a lista vazia", async () => {
+  it("mostra o estado de carregamento enquanto busca os NFTs", async () => {
+    await renderWithRouter(<NftGrid filters={DEFAULT_FILTERS} />);
+
+    expect(screen.getByRole("status")).toHaveTextContent("Carregando NFTs...");
+    expect(
+      await screen.findByRole("link", { name: `Ver detalhes de ${marketNfts[0].name}` }),
+    ).toBeVisible();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+
+  it("trata falha da API mostrando a mensagem de erro", async () => {
     server.use(http.get("/api/nfts", () => HttpResponse.error()));
     const { client } = await renderWithRouter(<NftGrid filters={DEFAULT_FILTERS} />);
     await waitFor(() =>
       expect(client.getQueryState(["nfts"])?.status).toBe("error"),
     );
 
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Não foi possível carregar os NFTs.",
+    );
     expect(
-      await screen.findByText("Nenhum NFT encontrado com esses filtros."),
-    ).toBeVisible();
+      screen.queryByText("Nenhum NFT encontrado com esses filtros."),
+    ).not.toBeInTheDocument();
   });
 
   it("usa os dados do mock como fonte", async () => {

@@ -8,7 +8,6 @@ import { getLastViewedNftId, setLastViewedNftId } from "@/lib/lastViewedNft";
 const breadcrumb = () => screen.getByRole("navigation", { name: "Navegação estrutural" });
 
 beforeEach(() => {
-  // NftGrid faz console.log da lista (log de depuração).
   vi.spyOn(console, "log").mockImplementation(() => {});
 });
 
@@ -170,7 +169,6 @@ describe("página NftDetails", () => {
 });
 
 describe("página Carrinho", () => {
-  /** A tabela do carrinho; o carrossel "Colecionadores também viram" repete alguns nomes. */
   const tabela = () => screen.getByRole("table", { name: "NFTs no carrinho" });
   const aguardarItens = () => within(tabela()).findByText("Emerald Ape #042");
 
@@ -291,7 +289,6 @@ describe("página Carrinho", () => {
 
 describe("página Pagamento", () => {
   async function preencherFormulario(user: Awaited<ReturnType<typeof renderApp>>["user"]) {
-    // A newsletter do rodapé também tem um campo "E-mail".
     const form = within(screen.getByRole("region", { name: "Perfil do colecionador" }));
     await user.type(form.getByLabelText(/Nome de exibição/), "Ana Souza");
     await user.type(form.getByLabelText(/Nome de usuário/), "ana");

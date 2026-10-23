@@ -189,7 +189,6 @@ describe("SignupForm", () => {
   });
 
   it("exige senha com pelo menos 8 caracteres (minlength do navegador)", () => {
-    // O jsdom não aplica minlength na validação; o atributo é o que o navegador usa.
     render(<SignupForm />);
 
     expect(screen.getByLabelText("Senha")).toHaveAttribute("minlength", "8");

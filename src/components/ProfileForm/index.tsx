@@ -32,9 +32,7 @@ type FieldProps = {
   id: string;
   label: string;
   required?: boolean;
-  /** Adiciona um espaço entre o texto do rótulo e o asterisco. */
   spacedMark?: boolean;
-  /** Espaço entre o rótulo e o campo. */
   gapClassName?: string;
   className?: string;
   children: ReactNode;

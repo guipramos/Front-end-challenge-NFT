@@ -1,8 +1,3 @@
-/**
- * Fluxos ponta a ponta (jornadas completas do usuário), executados com o app
- * inteiro renderizado (rotas reais, React Query e a API simulada pelo MSW).
- * Substituem, neste projeto, os testes E2E com navegador.
- */
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import { renderApp } from "@/test/utils";
@@ -38,14 +33,12 @@ describe("fluxo: descobrir, comprar e finalizar", () => {
   it("filtra na home, abre o NFT, compra, revisa o carrinho e paga", async () => {
     const { user, router } = await renderApp("/");
 
-    // 1. Home: filtra pela coleção "Fotografia" e abre o NFT resultante.
     await user.click(await screen.findByRole("button", { name: /Fotografia/ }));
     const grade = screen.getByRole("region", { name: "Lista de NFTs" });
     await user.click(
       await within(grade).findByRole("link", { name: "Ver detalhes de Sage Nomad #069" }),
     );
 
-    // 2. Detalhes: escolhe edição e quantidade e compra.
     expect(
       await screen.findByRole("heading", { level: 1, name: "Sage Nomad #069" }),
     ).toBeVisible();
@@ -54,7 +47,6 @@ describe("fluxo: descobrir, comprar e finalizar", () => {
     await user.click(screen.getByRole("button", { name: "Aumentar quantidade" }));
     await user.click(screen.getByRole("button", { name: "Comprar" }));
 
-    // 3. Carrinho: o NFT aparece com a quantidade e o total corretos.
     await waitFor(() => expect(router.state.location.pathname).toBe("/mercado/carrinho"));
     const tabela = within(await screen.findByRole("table", { name: "NFTs no carrinho" }));
     expect(await tabela.findByText("Sage Nomad #069")).toBeVisible();
@@ -65,14 +57,12 @@ describe("fluxo: descobrir, comprar e finalizar", () => {
     expect(await headerCart(4)).toBeVisible();
     expect(await screen.findByText("30.21 ETH")).toBeVisible();
 
-    // 4. Pagamento: preenche os dados e confirma a compra.
     await user.click(screen.getByRole("button", { name: "Conectar e finalizar" }));
     await waitFor(() => expect(router.state.location.pathname).toBe("/mercado/pagamento"));
     expect(await screen.findByText("Sage Nomad #069")).toBeVisible();
     await preencherPagamento(user);
     await user.click(screen.getByRole("button", { name: "Confirmar compra" }));
 
-    // 5. Sucesso: modal com a transação e carrinho esvaziado.
     const dialog = await screen.findByRole("dialog", {
       name: "Seus NFTs agora estão na sua carteira",
     });
@@ -130,14 +120,12 @@ describe("fluxo: gerenciar o carrinho", () => {
     const { user, router } = await renderApp("/mercado/carrinho");
     await within(cartTable()).findByText("Emerald Ape #042");
 
-    // Aumenta e diminui a quantidade.
     await user.click(screen.getByRole("button", { name: "Aumentar quantidade de Emerald Ape #042" }));
     expect(await screen.findByText("3.57 ETH")).toBeVisible();
     await user.click(screen.getByRole("button", { name: "Diminuir quantidade de Emerald Ape #042" }));
     await waitFor(() => expect(screen.queryByText("3.57 ETH")).not.toBeInTheDocument());
     expect(screen.getByText("2.38 ETH")).toBeVisible();
 
-    // Remove um item e confere o contador do cabeçalho e o subtotal.
     await user.click(screen.getByRole("button", { name: "Remover Ivory Baron #088 do carrinho" }));
     await waitFor(() =>
       expect(within(cartTable()).queryByText("Ivory Baron #088")).not.toBeInTheDocument(),
@@ -145,7 +133,6 @@ describe("fluxo: gerenciar o carrinho", () => {
     expect(await headerCart(2)).toBeVisible();
     expect(await screen.findByText("10.72 ETH")).toBeVisible();
 
-    // O pagamento reflete o carrinho atualizado.
     await user.click(screen.getByRole("button", { name: "Conectar e finalizar" }));
     await waitFor(() => expect(router.state.location.pathname).toBe("/mercado/pagamento"));
     expect(await screen.findByText("Emerald Ape #042")).toBeVisible();

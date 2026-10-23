@@ -11,7 +11,6 @@ const inputClass =
 
 type AuthInputProps = ComponentProps<typeof Input> & {
   id: string;
-  /** Rótulo acessível (visível apenas para leitores de tela; o design usa placeholder). */
   label: string;
 };
 

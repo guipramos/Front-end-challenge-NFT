@@ -77,7 +77,7 @@ Endpoints simulados:
 
 ## Testes
 
-Os testes foram escritos com **Vitest** (o runner nativo do Vite), **React Testing Library** e **user-event**, usando o **MSW** para simular a API. Eles cobrem desde as funções utilitárias até os fluxos completos da aplicação. São 357 testes em 19 arquivos.
+Os testes foram escritos com **Vitest** (o runner nativo do Vite), **React Testing Library** e **user-event**, usando o **MSW** para simular a API. Eles cobrem desde as funções utilitárias até os fluxos completos da aplicação. São 358 testes em 19 arquivos.
 
 ```bash
 pnpm test

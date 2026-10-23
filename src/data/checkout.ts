@@ -1,6 +1,5 @@
 import type { CheckoutOptions } from "../Types";
 
-/** "Banco de dados" do mock: devolvido pelo MSW em GET /api/checkout/options. */
 export const checkoutOptions: CheckoutOptions = {
   networks: [
     { value: "ethereum", label: "Ethereum" },
