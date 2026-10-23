@@ -46,7 +46,7 @@ pnpm install
 | Comando | Descrição |
 | --- | --- |
 | `pnpm dev` | Servidor de desenvolvimento, com os mocks do MSW ativos |
-| `pnpm build` | Verificação de tipos (`tsc -b`) e build de produção |
+| `pnpm build` | Verificação de tipos (`tsc -b`) e build de produção (com os mocks incluídos) |
 | `pnpm preview` | Serve localmente o build de produção |
 | `pnpm lint` | Executa o ESLint |
 | `pnpm test` | Executa a suíte de testes (Vitest) |
@@ -57,6 +57,7 @@ pnpm install
 
 Toda a camada de dados é simulada na rede com o **MSW**, sem backend real. Os componentes, hooks e o cliente Axios consomem a API normalmente, e quem responde é o Service Worker.
 
+- Os mocks ficam ativos no `pnpm dev`, no `pnpm preview` e no deploy. Para desativá-los, defina `VITE_ENABLE_MOCKS=false` no build.
 - Os handlers ficam em `src/mocks/handlers.ts` e o worker do navegador em `src/mocks/browser.ts`.
 - Os mocks mantêm estado em memória (por exemplo, o carrinho), então as alterações feitas pela interface aparecem nas respostas seguintes.
 - Os mesmos handlers são reutilizados nos testes, por meio de `setupServer` do `msw/node`.
